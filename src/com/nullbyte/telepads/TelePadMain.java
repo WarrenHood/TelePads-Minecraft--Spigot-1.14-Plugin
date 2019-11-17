@@ -203,6 +203,7 @@ public class TelePadMain extends JavaPlugin implements Listener{
 						else {
 							e.getPlayer().sendMessage(ChatColor.DARK_RED + "It appears that the telepad you are trying to link to has been destroyed... Unlinking it from this star");
 							handMeta.setLore(null);
+							handItem.setItemMeta(handMeta);
 						}
 					}
 				}

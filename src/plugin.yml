@@ -1,4 +1,4 @@
 name: TelePads
-version: 0.2
+version: 0.3
 main: com.nullbyte.telepads.TelePadMain
 api-version: 1.14

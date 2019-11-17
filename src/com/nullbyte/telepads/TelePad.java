@@ -177,21 +177,21 @@ public class TelePad extends BukkitRunnable {
 		if(linkedPad != null && hasFuel() && checkIntegrity(linkedPad.lapisLoc)) {
 			consumeFuel();
 			showTPEffects();
-			linkedPad.showTPEffects();
+			
 			p.setSneaking(false);
-			p.teleport(new Location(linkedPad.lapisLoc.getWorld(), linkedPad.lapisLoc.getBlockX(), linkedPad.lapisLoc.getBlockY()+1, linkedPad.lapisLoc.getBlockZ()));
+			float originalYaw = p.getLocation().getYaw();
+			float originalPitch = p.getLocation().getPitch();
+			p.teleport(new Location(linkedPad.lapisLoc.getWorld(), linkedPad.lapisLoc.getBlockX(), linkedPad.lapisLoc.getBlockY()+1, linkedPad.lapisLoc.getBlockZ(),originalYaw, originalPitch));
+			linkedPad.showTPEffects();
 		}
 		
 		// Otherwise can't tp
 	}
 	
 	public Player getPlayerOnPad() {
-		for(Entity e : lapisLoc.getWorld().getNearbyEntities(lapisLoc, 3.0, 3.0, 3.0)) {
-			if(e instanceof Player) {
-				Player p = (Player)e;
-				if(!p.isSneaking()) continue;
-				if(p.getLocation().getBlockX() == lapisLoc.getBlockX() && p.getLocation().getBlockY() == lapisLoc.getBlockY()+1 && p.getLocation().getBlockZ() == lapisLoc.getBlockZ()) return p;
-			}
+		for(Player p : Bukkit.getOnlinePlayers()) {
+			if(!p.isSneaking()) continue;
+			if(p.getLocation().getWorld().getName().equals(lapisLoc.getWorld().getName()) && p.getLocation().getBlockX() == lapisLoc.getBlockX() && p.getLocation().getBlockY() == lapisLoc.getBlockY()+1 && p.getLocation().getBlockZ() == lapisLoc.getBlockZ()) return p;
 		}
 		return null;
 	}
@@ -234,8 +234,6 @@ public class TelePad extends BukkitRunnable {
 				tp(p);
 			}
 		}
-		
-
 	}
 	
 	
