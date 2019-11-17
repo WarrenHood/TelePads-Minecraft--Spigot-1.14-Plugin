@@ -209,6 +209,14 @@ public class TelePad extends BukkitRunnable {
 		}
 	}
 	
+	public void tellOwner(String msg) {
+		for(Player p : lapisLoc.getWorld().getPlayers()) {
+			if(owner.equals(p.getName())) {
+				p.sendMessage(msg);
+			}
+		}
+	}
+	
 	
 	public Location getLapisLocation() {
 		return lapisLoc;

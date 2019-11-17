@@ -111,7 +111,7 @@ public class TelePadMain extends JavaPlugin implements Listener{
 		for(int i=0; i<telePads.size(); i++) {
 			if(lapisLoc.equals(telePads.get(i).getLapisLocation())) {
 				telePads.get(i).cancel();
-				Bukkit.broadcastMessage(ChatColor.DARK_RED + "TelePad at " + telePads.get(i).getLapisLocation().toVector().toString() + " has been destroyed." );
+				telePads.get(i).tellOwner(ChatColor.DARK_RED + "Your telePad at " + telePads.get(i).getLapisLocation().toVector().toString() + " has been destroyed." );
 				telePads.remove(i);
 				saveTelePads();
 				return;
